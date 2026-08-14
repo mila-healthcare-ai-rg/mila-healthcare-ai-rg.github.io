@@ -90,6 +90,10 @@
   .logo-mark{height:38px;width:auto;display:block;flex:none}
   .foot-logos{display:flex;align-items:center;gap:10px;font-weight:700}
   .menu{display:flex;align-items:center;gap:4px;margin-left:auto}
+  .nav-ctrls{display:flex;align-items:center;gap:8px;margin-left:8px}
+  .nav-ctrls .ctrl{margin-left:0}
+  .nav-toggle{display:none;background:var(--panel);border:1px solid var(--line);border-radius:10px;width:42px;height:38px;align-items:center;justify-content:center;color:var(--ink);cursor:pointer}
+  .nav-toggle:hover{border-color:var(--ink)}
   .menu a.tab{color:var(--muted);font-size:14px;font-weight:600;padding:8px 12px;border-radius:999px;transition:.15s;cursor:pointer}
   .menu a.tab:hover{color:var(--ink);background:var(--bg-soft)}
   .menu a.tab.active{background:var(--ink);color:var(--bg)}
@@ -161,10 +165,25 @@
   .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 
   @media (max-width:820px){
-    .menu a.tab{padding:7px 9px;font-size:13px}
     .about-grid{grid-template-columns:1fr}
     .people{grid-template-columns:1fr}
     .brand small{display:none}
+    .brand span{white-space:nowrap;font-size:16px}
+    .nav-inner{position:relative}
+    .nav-toggle{display:inline-flex}
+    .menu{
+      position:absolute;top:64px;left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:4px;margin-left:0;
+      background:var(--header-bg);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+      padding:10px 16px 16px;display:none;
+      box-shadow:0 12px 24px rgba(0,0,0,.10);
+    }
+    .menu.open{display:flex}
+    .menu a.tab{font-size:16px;padding:11px 14px;border-radius:12px}
+    .menu a.tab:hover{background:var(--bg-soft)}
+    .menu a.join{margin-left:0;margin-top:6px;justify-content:center}
+    .nav-ctrls{margin-left:0;margin-top:8px;justify-content:flex-start}
   }
 </style>
 </head>
@@ -176,15 +195,18 @@
       <img class="logo-mark" src="assets/logo-bust.png" alt="" />
       <span>Mila Healthcare AI RG<small data-en="AI × Healthcare" data-fr="IA × Santé">AI × Healthcare</small></span>
     </div>
-    <nav class="menu">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="menu" id="menu">
       <a class="tab active" data-page="home" data-en="Home" data-fr="Accueil">Home</a>
       <a class="tab" data-page="upcoming" data-en="Upcoming" data-fr="À venir">Upcoming</a>
       <a class="tab" data-page="past" data-en="Past talks" data-fr="Présentations passées">Past talks</a>
       <a class="tab" data-page="news" data-en="News" data-fr="Actualités">News</a>
       <a class="tab" data-page="about" data-en="About" data-fr="À propos">About</a>
       <a class="join" data-page="about" style="cursor:pointer" data-en="Get involved" data-fr="Participer">Get involved</a>
-      <button class="ctrl" id="langBtn" type="button" title="Français / English">FR</button>
-      <button class="ctrl ctrl-icon" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Dark mode"></button>
+      <div class="nav-ctrls">
+        <button class="ctrl" id="langBtn" type="button" title="Français / English">FR</button>
+        <button class="ctrl ctrl-icon" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Dark mode"></button>
+      </div>
     </nav>
   </div>
 </header>
@@ -293,8 +315,13 @@
     tabs.forEach(t=>t.classList.toggle('active', t.dataset.page===id));
     window.scrollTo({top:0,behavior:'instant'});
   }
+  const navToggle = document.getElementById('navToggle');
+  const menuEl = document.getElementById('menu');
+  if(navToggle && menuEl){
+    navToggle.addEventListener('click', ()=>{ const open = menuEl.classList.toggle('open'); navToggle.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+  }
   document.querySelectorAll('[data-page]').forEach(el=>{
-    el.addEventListener('click', e=>{ e.preventDefault(); show(el.dataset.page); });
+    el.addEventListener('click', e=>{ e.preventDefault(); show(el.dataset.page); if(menuEl){ menuEl.classList.remove('open'); if(navToggle) navToggle.setAttribute('aria-expanded','false'); } });
   });
 
   // Rich (HTML) blocks that switch language
