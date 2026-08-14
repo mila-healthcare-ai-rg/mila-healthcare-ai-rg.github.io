@@ -174,7 +174,7 @@
     .menu{
       position:absolute;top:64px;left:0;right:0;z-index:60;
       flex-direction:column;align-items:stretch;gap:4px;margin-left:0;
-      background:var(--bg);
+      background:var(--panel-soft);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
       border-bottom:1px solid var(--line);
       padding:10px 16px 16px;display:none;
       box-shadow:0 12px 28px rgba(0,0,0,.16);
@@ -369,8 +369,9 @@
   }
 
   (function init(){
-    let lang = 'en';
-    try{ lang = localStorage.getItem('lang') || 'en'; }catch(e){}
+    let lang = null;
+    try{ lang = localStorage.getItem('lang'); }catch(e){}
+    if(!lang) lang = ((navigator.language || navigator.userLanguage || '').toLowerCase().indexOf('fr') === 0) ? 'fr' : 'en';
     let theme = null;
     try{ theme = localStorage.getItem('theme'); }catch(e){}
     if(!theme) theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
