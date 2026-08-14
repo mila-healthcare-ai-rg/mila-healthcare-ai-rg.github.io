@@ -15,9 +15,30 @@
     --line:#e7e7e7;
     --bg:#ffffff;
     --bg-soft:#f7f7f7;
+    --panel:rgba(255,255,255,.92);
+    --panel-strong:rgba(255,255,255,.96);
+    --panel-soft:rgba(255,255,255,.85);
+    --header-bg:rgba(255,255,255,.72);
+    --card-hover-border:#cfcfcf;
+    --about-p:#333;
     --maxw:1080px;
     --r:14px;
   }
+  html[data-theme="dark"]{
+    --ink:#eef1f5;
+    --muted:#9aa3af;
+    --line:#282d36;
+    --bg:#0e1116;
+    --bg-soft:#1a1f28;
+    --panel:rgba(24,29,38,.86);
+    --panel-strong:rgba(24,29,38,.95);
+    --panel-soft:rgba(24,29,38,.7);
+    --header-bg:rgba(14,17,22,.72);
+    --card-hover-border:#3a4150;
+    --about-p:#c9cfd8;
+  }
+  html{color-scheme:light}
+  html[data-theme="dark"]{color-scheme:dark}
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
@@ -42,13 +63,23 @@
     content:"";position:fixed;inset:0;z-index:-1;
     background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.30));
   }
+  html[data-theme="dark"] body::before{
+    background:
+      radial-gradient(closest-side at 20% 20%, rgba(70,92,140,.20), rgba(0,0,0,0) 70%),
+      radial-gradient(closest-side at 76% 28%, rgba(80,66,120,.16), rgba(0,0,0,0) 70%),
+      radial-gradient(closest-side at 40% 78%, rgba(40,60,100,.16), rgba(0,0,0,0) 70%),
+      linear-gradient(180deg,#0b0e14 0%, #0e1220 45%, #0a0c11 100%);
+  }
+  html[data-theme="dark"] body::after{background:linear-gradient(180deg,rgba(10,12,17,.28),rgba(10,12,17,.46))}
+  .ctrl{margin-left:8px;height:34px;min-width:34px;padding:0 11px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s}
+  .ctrl:hover{border-color:var(--ink)}
   a{color:inherit;text-decoration:none}
   a.inl{color:inherit;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px;font-weight:600}
   a.inl:hover{color:var(--red)}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
 
   /* Top bar - brand left, menu right */
-  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  header.nav{position:sticky;top:0;z-index:50;background:var(--header-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em;cursor:pointer}
   .brand .logo{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
@@ -59,7 +90,7 @@
   .menu{display:flex;align-items:center;gap:4px;margin-left:auto}
   .menu a.tab{color:var(--muted);font-size:14px;font-weight:600;padding:8px 12px;border-radius:999px;transition:.15s;cursor:pointer}
   .menu a.tab:hover{color:var(--ink);background:var(--bg-soft)}
-  .menu a.tab.active{color:var(--ink);background:var(--ink);color:#fff}
+  .menu a.tab.active{background:var(--ink);color:var(--bg)}
   .menu a.join{margin-left:10px;background:transparent;color:var(--ink);border:1px solid var(--ink);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600}
   .menu a.join:hover{background:var(--red);border-color:var(--red);color:#fff}
 
@@ -88,35 +119,35 @@
     .hero-art img{height:190px}
   }
   .btn{padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--ink);transition:.15s;cursor:pointer;background:transparent;color:var(--ink)}
-  .btn.solid{background:var(--ink);color:#fff}
-  .btn.solid:hover{background:var(--red);border-color:var(--red)}
-  .btn.ghost:hover{background:#fff}
+  .btn.solid{background:var(--ink);color:var(--bg)}
+  .btn.solid:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.ghost:hover{background:var(--panel)}
 
   /* Cards */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-  .card{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:rgba(255,255,255,.92);transition:.18s}
-  .card:hover{border-color:#cfcfcf;transform:translateY(-2px)}
+  .card{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--panel);transition:.18s}
+  .card:hover{border-color:var(--card-hover-border);transform:translateY(-2px)}
   .card .when{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.03em}
   .card h3{margin:8px 0 6px;font-size:18px;letter-spacing:-.01em;line-height:1.3}
   .card .who{font-size:14px;font-weight:600}
   .card .aff{font-size:13px;color:var(--muted)}
   .card p.abs{font-size:14px;color:var(--muted);margin:12px 0 0}
   .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-  .featured{border:1px solid var(--ink);background:rgba(255,255,255,.96)}
-  .empty{border:1px dashed var(--line);border-radius:var(--r);padding:34px;text-align:center;color:var(--muted);background:rgba(255,255,255,.85)}
+  .featured{border:1px solid var(--ink);background:var(--panel-strong)}
+  .empty{border:1px dashed var(--line);border-radius:var(--r);padding:34px;text-align:center;color:var(--muted);background:var(--panel-soft)}
 
   /* About */
   .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px}
   .people{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
-  .person{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.92)}
-  .avatar{width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
+  .person{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:center;background:var(--panel)}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
   .person b{display:block;font-size:14px}
   .person span{font-size:12px;color:var(--muted)}
-  .about p{color:#333;font-size:16px}
+  .about p{color:var(--about-p);font-size:16px}
   .links{margin-top:12px}
-  .links a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;margin:6px 8px 0 0;background:rgba(255,255,255,.9)}
+  .links a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;margin:6px 8px 0 0;background:var(--panel)}
   .links a:hover{border-color:var(--ink)}
-  .links a.join{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .links a.join{background:var(--ink);color:var(--bg);border-color:var(--ink)}
   .links a.join:hover{background:var(--red);border-color:var(--red)}
 
   footer{padding:20px 0;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);background:rgba(255,255,255,.6)}
@@ -136,15 +167,17 @@
   <div class="wrap nav-inner">
     <div class="brand" data-page="home">
       <img class="logo-mark" src="assets/logo-bust.png" alt="" />
-      <span>Mila Healthcare AI RG<small>AI &times; Healthcare</small></span>
+      <span>Mila Healthcare AI RG<small data-en="AI × Healthcare" data-fr="IA × Santé">AI × Healthcare</small></span>
     </div>
     <nav class="menu">
-      <a class="tab active" data-page="home">Home</a>
-      <a class="tab" data-page="upcoming">Upcoming</a>
-      <a class="tab" data-page="past">Past talks</a>
-      <a class="tab" data-page="news">News</a>
-      <a class="tab" data-page="about">About</a>
-      <a class="join" data-page="about" style="cursor:pointer">Get involved</a>
+      <a class="tab active" data-page="home" data-en="Home" data-fr="Accueil">Home</a>
+      <a class="tab" data-page="upcoming" data-en="Upcoming" data-fr="À venir">Upcoming</a>
+      <a class="tab" data-page="past" data-en="Past talks" data-fr="Conférences passées">Past talks</a>
+      <a class="tab" data-page="news" data-en="News" data-fr="Actualités">News</a>
+      <a class="tab" data-page="about" data-en="About" data-fr="À propos">About</a>
+      <a class="join" data-page="about" style="cursor:pointer" data-en="Get involved" data-fr="Participer">Get involved</a>
+      <button class="ctrl" id="langBtn" type="button" title="Français / English">FR</button>
+      <button class="ctrl" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Dark mode">🌙</button>
     </nav>
   </div>
 </header>
@@ -156,11 +189,11 @@
     <section class="page active home" id="home">
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Where AI<br>meets healthcare.</h1>
-          <p class="lead">A community reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> exploring machine learning for medicine - talks from clinicians and researchers, papers worth reading, and the ideas shaping clinical AI.</p>
+          <h1 id="heroTitle">Where AI<br>meets healthcare.</h1>
+          <p class="lead" id="heroLead">A community reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> exploring machine learning for medicine - talks from clinicians and researchers, papers worth reading, and the ideas shaping clinical AI.</p>
           <div class="btns">
-            <button class="btn solid" data-page="upcoming">See upcoming talks</button>
-            <button class="btn ghost" data-page="about">About the group</button>
+            <button class="btn solid" data-page="upcoming" data-en="See upcoming talks" data-fr="Voir les conférences à venir">See upcoming talks</button>
+            <button class="btn ghost" data-page="about" data-en="About the group" data-fr="À propos du groupe">About the group</button>
           </div>
         </div>
         <div class="hero-art">
@@ -171,47 +204,47 @@
 
     <!-- UPCOMING -->
     <section class="page" id="upcoming">
-      <div class="sec-head"><span class="tag">Next up</span><h2>Upcoming talks</h2><p>Talks run over Google Meet (and in room A16 when in person).</p></div>
+      <div class="sec-head"><span class="tag" data-en="Next up" data-fr="Prochainement">Next up</span><h2 data-en="Upcoming talks" data-fr="Conférences à venir">Upcoming talks</h2><p data-en="Talks run over Google Meet (and in room A16 when in person)." data-fr="Les conférences ont lieu sur Google Meet (et en salle A16 en présentiel).">Talks run over Google Meet (and in room A16 when in person).</p></div>
       <div class="grid">
         <div class="card featured">
-          <div class="when">To be announced</div>
-          <h3>Our next speaker is being scheduled</h3>
-          <div class="aff">Check back soon - or request to be added to get talk announcements first.</div>
-          <p class="abs">We schedule each talk around the speaker&rsquo;s availability, so dates vary week to week.</p>
+          <div class="when" data-en="To be announced" data-fr="À annoncer">To be announced</div>
+          <h3 data-en="Our next speaker is being scheduled" data-fr="Notre prochaine personne invitée est en cours de planification">Our next speaker is being scheduled</h3>
+          <div class="aff" data-en="Check back soon - or request to be added to get talk announcements first." data-fr="Revenez bientôt - ou demandez à être ajouté pour recevoir les annonces en primeur.">Check back soon - or request to be added to get talk announcements first.</div>
+          <p class="abs" data-en="We schedule each talk around the speaker's availability, so dates vary week to week." data-fr="Nous planifions chaque conférence selon la disponibilité de la personne invitée, donc les dates varient d'une semaine à l'autre.">We schedule each talk around the speaker&rsquo;s availability, so dates vary week to week.</p>
         </div>
       </div>
     </section>
 
     <!-- PAST -->
     <section class="page" id="past">
-      <div class="sec-head"><span class="tag">Archive</span><h2>Past talks</h2><p>A selection of recent sessions.</p></div>
+      <div class="sec-head"><span class="tag" data-en="Archive" data-fr="Archives">Archive</span><h2 data-en="Past talks" data-fr="Conférences passées">Past talks</h2><p data-en="A selection of recent sessions." data-fr="Une sélection de séances récentes.">A selection of recent sessions.</p></div>
       <div class="grid">
         <div class="card">
-          <div class="when">Oct 21, 2025</div>
+          <div class="when" data-en="Oct 21, 2025" data-fr="21 oct. 2025">Oct 21, 2025</div>
           <h3>Scaling Care, Scaling Bias: LLMs, Equity, and Safety in Clinical Decisions</h3>
           <div class="who">Mahmud Omar, MD</div>
           <div class="aff">Windreich Dept. of AI &amp; Human Health, Mount Sinai</div>
-          <p class="abs">Equity-first evaluation of LLMs in triage, mental health, and clinical decisions - and practical guardrails to keep model-assisted care safe and fair.</p>
+          <p class="abs" data-en="Equity-first evaluation of LLMs in triage, mental health, and clinical decisions - and practical guardrails to keep model-assisted care safe and fair." data-fr="Évaluation des LLM axée sur l'équité en triage, santé mentale et décisions cliniques - et des garde-fous concrets pour des soins assistés par modèle sûrs et équitables.">Equity-first evaluation of LLMs in triage, mental health, and clinical decisions - and practical guardrails to keep model-assisted care safe and fair.</p>
         </div>
         <div class="card">
-          <div class="when">Feb 2025</div>
+          <div class="when" data-en="Feb 2025" data-fr="Févr. 2025">Feb 2025</div>
           <h3>From AI Bias to AI by Us, for All of Us</h3>
           <div class="who">Leo Anthony Celi</div>
           <div class="aff">MIT - MIMIC / Laboratory for Computational Physiology</div>
-          <p class="abs">Rethinking the knowledge systems behind medical AI: delivering AI&rsquo;s promise is about redesigning education and innovation, not just building models.</p>
+          <p class="abs" data-en="Rethinking the knowledge systems behind medical AI: delivering AI's promise is about redesigning education and innovation, not just building models." data-fr="Repenser les systèmes de connaissances derrière l'IA médicale : tenir la promesse de l'IA passe par la refonte de la formation et de l'innovation, pas seulement par la construction de modèles.">Rethinking the knowledge systems behind medical AI: delivering AI&rsquo;s promise is about redesigning education and innovation, not just building models.</p>
         </div>
         <div class="card" style="display:grid;place-items:center;text-align:center;color:var(--muted)">
-          <div><span class="pill">More coming</span><p class="abs" style="margin-top:10px">Recordings and the full archive will live here.</p></div>
+          <div><span class="pill" data-en="More coming" data-fr="À venir">More coming</span><p class="abs" style="margin-top:10px" data-en="Recordings and the full archive will live here." data-fr="Les enregistrements et les archives complètes se trouveront ici.">Recordings and the full archive will live here.</p></div>
         </div>
       </div>
     </section>
 
     <!-- NEWS -->
     <section class="page" id="news">
-      <div class="sec-head"><span class="tag">Reading</span><h2>News &amp; papers</h2><p>Healthcare-AI reads, releases, and (soon) podcast picks.</p></div>
+      <div class="sec-head"><span class="tag" data-en="Reading" data-fr="Lectures">Reading</span><h2 data-en="News &amp; papers" data-fr="Actualités et articles">News &amp; papers</h2><p data-en="Healthcare-AI reads, releases, and (soon) podcast picks." data-fr="Lectures en IA-santé, nouveautés et (bientôt) suggestions de balados.">Healthcare-AI reads, releases, and (soon) podcast picks.</p></div>
       <div class="grid">
-        <div class="card"><span class="pill">Coming soon</span><h3>Curated healthcare-AI news</h3><p class="abs">Short notes on papers and releases the group is discussing.</p></div>
-        <div class="card"><span class="pill">Planned</span><h3>Podcast picks</h3><p class="abs">Episodes worth a listen at the intersection of AI and medicine.</p></div>
+        <div class="card"><span class="pill" data-en="Coming soon" data-fr="Bientôt">Coming soon</span><h3 data-en="Curated healthcare-AI news" data-fr="Nouvelles choisies en IA-santé">Curated healthcare-AI news</h3><p class="abs" data-en="Short notes on papers and releases the group is discussing." data-fr="De courtes notes sur les articles et nouveautés dont le groupe discute.">Short notes on papers and releases the group is discussing.</p></div>
+        <div class="card"><span class="pill" data-en="Planned" data-fr="Prévu">Planned</span><h3 data-en="Podcast picks" data-fr="Suggestions de balados">Podcast picks</h3><p class="abs" data-en="Episodes worth a listen at the intersection of AI and medicine." data-fr="Des épisodes à écouter à l'intersection de l'IA et de la médecine.">Episodes worth a listen at the intersection of AI and medicine.</p></div>
       </div>
     </section>
 
@@ -219,24 +252,24 @@
     <section class="page about" id="about">
       <div class="about-grid">
         <div>
-          <span class="tag">About</span>
-          <h2 style="font-size:30px;letter-spacing:-.02em;margin:6px 0 14px;font-weight:800">Who we are</h2>
-          <p>Mila Healthcare AI RG is a reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> bringing together students, researchers, and clinicians to discuss machine learning for healthcare - from foundational methods to real clinical deployment.</p>
-          <p>We host talks from invited speakers, read and debate papers, and build a community around responsible AI in medicine.</p>
-          <p style="margin-top:6px"><strong>Want to attend</strong> or <strong>give a talk?</strong> Send a quick request and we will get back to you.</p>
+          <span class="tag" data-en="About" data-fr="À propos">About</span>
+          <h2 style="font-size:30px;letter-spacing:-.02em;margin:6px 0 14px;font-weight:800" data-en="Who we are" data-fr="Qui nous sommes">Who we are</h2>
+          <p id="aboutP1">Mila Healthcare AI RG is a reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> bringing together students, researchers, and clinicians to discuss machine learning for healthcare - from foundational methods to real clinical deployment.</p>
+          <p data-en="We host talks from invited speakers, read and debate papers, and build a community around responsible AI in medicine." data-fr="Nous accueillons des personnes invitées, lisons et débattons d'articles, et bâtissons une communauté autour d'une IA responsable en médecine.">We host talks from invited speakers, read and debate papers, and build a community around responsible AI in medicine.</p>
+          <p style="margin-top:6px" id="aboutP3"><strong>Want to attend</strong> or <strong>give a talk?</strong> Send a quick request and we will get back to you.</p>
           <div class="links">
-            <a class="join" href="https://docs.google.com/forms/d/e/1FAIpQLSdrQc6NeJUgKzgjV7fbmP9rxWsA-yWMF114wbEHqzQdgwiqhw/viewform" target="_blank" rel="noopener">Request to join&nbsp;&rarr;</a>
-            <a class="join" href="https://docs.google.com/forms/d/e/1FAIpQLSeBRD95Pbq0lD_EusHK9nzIAYYDLGQn_xKTT_K7JFjtDgkzdw/viewform" target="_blank" rel="noopener">Request to present&nbsp;&rarr;</a>
-            <a href="mailto:mohsen.amoei@mila.quebec">Contact&nbsp;&rarr;</a>
+            <a class="join" href="https://docs.google.com/forms/d/e/1FAIpQLSdrQc6NeJUgKzgjV7fbmP9rxWsA-yWMF114wbEHqzQdgwiqhw/viewform" target="_blank" rel="noopener" data-en="Request to join →" data-fr="Demander à joindre →">Request to join&nbsp;&rarr;</a>
+            <a class="join" href="https://docs.google.com/forms/d/e/1FAIpQLSeBRD95Pbq0lD_EusHK9nzIAYYDLGQn_xKTT_K7JFjtDgkzdw/viewform" target="_blank" rel="noopener" data-en="Request to present →" data-fr="Proposer une présentation →">Request to present&nbsp;&rarr;</a>
+            <a href="mailto:mohsen.amoei@mila.quebec" data-en="Contact →" data-fr="Contact →">Contact&nbsp;&rarr;</a>
           </div>
         </div>
         <div>
-          <span class="tag">Organizers</span>
+          <span class="tag" data-en="Organizers" data-fr="Organisateurs">Organizers</span>
           <div class="people">
-            <div class="person"><div class="avatar">MA</div><div><b>Mohsen Amoei</b><span>Coordinator &middot; Mila / McGill</span></div></div>
-            <div class="person"><div class="avatar">DP</div><div><b>Dan Poenaru</b><span>Faculty lead &middot; McGill</span></div></div>
-            <div class="person"><div class="avatar">+</div><div><b>Core members</b><span>Add the rest of the team</span></div></div>
-            <div class="person"><div class="avatar">+</div><div><b>You?</b><span>Get involved</span></div></div>
+            <div class="person"><div class="avatar">MA</div><div><b>Mohsen Amoei</b><span data-en="Coordinator · Mila / McGill" data-fr="Coordonnateur · Mila / McGill">Coordinator &middot; Mila / McGill</span></div></div>
+            <div class="person"><div class="avatar">DP</div><div><b>Dan Poenaru</b><span data-en="Faculty lead · McGill" data-fr="Responsable facultaire · McGill">Faculty lead &middot; McGill</span></div></div>
+            <div class="person"><div class="avatar">+</div><div><b data-en="Core members" data-fr="Membres principaux">Core members</b><span data-en="Add the rest of the team" data-fr="Ajouter le reste de l'équipe">Add the rest of the team</span></div></div>
+            <div class="person"><div class="avatar">+</div><div><b data-en="You?" data-fr="Vous?">You?</b><span data-en="Get involved" data-fr="Participer">Get involved</span></div></div>
           </div>
         </div>
       </div>
@@ -256,6 +289,62 @@
   document.querySelectorAll('[data-page]').forEach(el=>{
     el.addEventListener('click', e=>{ e.preventDefault(); show(el.dataset.page); });
   });
+
+  // Rich (HTML) blocks that switch language
+  const I18N_HTML = {
+    heroTitle: {
+      en: `Where AI<br>meets healthcare.`,
+      fr: `Quand l'IA<br>rencontre la santé.`
+    },
+    heroLead: {
+      en: `A community reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> exploring machine learning for medicine - talks from clinicians and researchers, papers worth reading, and the ideas shaping clinical AI.`,
+      fr: `Un groupe de lecture communautaire à <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> et <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> qui explore l'apprentissage automatique pour la médecine - des présentations de cliniciens et de chercheurs, des articles à lire, et les idées qui façonnent l'IA clinique.`
+    },
+    aboutP1: {
+      en: `Mila Healthcare AI RG is a reading group at <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> and <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> bringing together students, researchers, and clinicians to discuss machine learning for healthcare - from foundational methods to real clinical deployment.`,
+      fr: `Mila Healthcare AI RG est un groupe de lecture à <a class="inl" href="https://mila.quebec" target="_blank" rel="noopener">Mila</a> et <a class="inl" href="https://www.mcgill.ca" target="_blank" rel="noopener">McGill</a> qui réunit étudiants, chercheurs et cliniciens pour discuter de l'apprentissage automatique en santé - des méthodes fondamentales au déploiement clinique réel.`
+    },
+    aboutP3: {
+      en: `<strong>Want to attend</strong> or <strong>give a talk?</strong> Send a quick request and we will get back to you.`,
+      fr: `<strong>Envie d'assister</strong> ou de <strong>donner une conférence?</strong> Envoyez une courte demande et nous vous répondrons.`
+    }
+  };
+
+  function setLang(lang){
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const v = el.dataset[lang];
+      if(v != null) el.innerHTML = v;
+    });
+    for(const id in I18N_HTML){
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = I18N_HTML[id][lang];
+    }
+    const lb = document.getElementById('langBtn');
+    if(lb) lb.textContent = (lang === 'en' ? 'FR' : 'EN');
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    const tb = document.getElementById('themeBtn');
+    if(tb) tb.textContent = (t === 'dark' ? '☀️' : '🌙');
+    try{ localStorage.setItem('theme', t); }catch(e){}
+  }
+
+  (function init(){
+    let lang = 'en';
+    try{ lang = localStorage.getItem('lang') || 'en'; }catch(e){}
+    let theme = null;
+    try{ theme = localStorage.getItem('theme'); }catch(e){}
+    if(!theme) theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    setTheme(theme);
+    setLang(lang);
+    const lb = document.getElementById('langBtn');
+    if(lb) lb.addEventListener('click', ()=> setLang(document.documentElement.getAttribute('lang') === 'fr' ? 'en' : 'fr'));
+    const tb = document.getElementById('themeBtn');
+    if(tb) tb.addEventListener('click', ()=> setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+  })();
 </script>
 </body>
 </html>
