@@ -73,6 +73,8 @@
   html[data-theme="dark"] body::after{background:linear-gradient(180deg,rgba(10,12,17,.28),rgba(10,12,17,.46))}
   .ctrl{margin-left:8px;height:34px;min-width:34px;padding:0 11px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.15s}
   .ctrl:hover{border-color:var(--ink)}
+  .ctrl-icon{padding:0;width:34px}
+  .ctrl svg{display:block}
   a{color:inherit;text-decoration:none}
   a.inl{color:inherit;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px;font-weight:600}
   a.inl:hover{color:var(--red)}
@@ -180,7 +182,7 @@
       <a class="tab" data-page="about" data-en="About" data-fr="À propos">About</a>
       <a class="join" data-page="about" style="cursor:pointer" data-en="Get involved" data-fr="Participer">Get involved</a>
       <button class="ctrl" id="langBtn" type="button" title="Français / English">FR</button>
-      <button class="ctrl" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Dark mode">🌙</button>
+      <button class="ctrl ctrl-icon" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Dark mode"></button>
     </nav>
   </div>
 </header>
@@ -327,10 +329,12 @@
     try{ localStorage.setItem('lang', lang); }catch(e){}
   }
 
+  const ICON_MOON = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+  const ICON_SUN = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.3M12 19.2v2.3M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>';
   function setTheme(t){
     document.documentElement.setAttribute('data-theme', t);
     const tb = document.getElementById('themeBtn');
-    if(tb) tb.textContent = (t === 'dark' ? '☀️' : '🌙');
+    if(tb) tb.innerHTML = (t === 'dark' ? ICON_SUN : ICON_MOON);
     try{ localStorage.setItem('theme', t); }catch(e){}
   }
 
