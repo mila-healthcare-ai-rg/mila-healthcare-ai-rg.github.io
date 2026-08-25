@@ -143,6 +143,21 @@
   .rec:hover{border-color:var(--red)}
   .featured{border:1px solid var(--ink);background:var(--panel-strong)}
   .empty{border:1px dashed var(--line);border-radius:var(--r);padding:34px;text-align:center;color:var(--muted);background:var(--panel-soft)}
+  /* Upcoming: calendar (left) + cards (right) */
+  .up-layout{display:grid;grid-template-columns:minmax(250px,330px) 1fr;gap:22px;align-items:start}
+  @media(max-width:820px){.up-layout{grid-template-columns:1fr}}
+  .cal{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:var(--panel);position:sticky;top:82px}
+  .cal-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .cal-title{font-size:16px;font-weight:800;letter-spacing:-.01em}
+  .cal-sub{font-size:12px;color:var(--muted);font-weight:700}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+  .cal-grid .dow{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;padding:2px 0 6px;text-transform:uppercase;letter-spacing:.03em}
+  .cal-cell{height:36px;display:grid;place-items:center;font-size:13px;border-radius:9px;color:var(--ink)}
+  .cal-cell.blank{color:transparent}
+  .cal-cell.talk{background:var(--red);color:#fff;font-weight:800;position:relative;cursor:default}
+  .cal-cell.talk::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.9}
+  .cal-legend{display:flex;align-items:center;gap:8px;margin-top:15px;font-size:12px;color:var(--muted)}
+  .cal-legend .dot{width:11px;height:11px;border-radius:50%;background:var(--red);display:inline-block;flex:none}
 
   /* About */
   .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px}
@@ -235,7 +250,59 @@
     <!-- UPCOMING -->
     <section class="page" id="upcoming">
       <div class="sec-head"><span class="tag" data-en="Next up" data-fr="Prochainement">Next up</span><h2 data-en="Upcoming talks" data-fr="Présentations à venir">Upcoming talks</h2><p data-en="Talks run over Google Meet (and in room A16 when in person)." data-fr="Les présentations ont lieu sur Google Meet (et en salle A16 en présentiel).">Talks run over Google Meet (and in room A16 when in person).</p></div>
-      <div class="grid">
+      <div class="up-layout">
+        <aside class="cal" aria-label="Upcoming talks calendar">
+          <div class="cal-head">
+            <div class="cal-title" data-en="October 2026" data-fr="Octobre 2026">October 2026</div>
+            <div class="cal-sub" data-en="2 talks" data-fr="2 présentations">2 talks</div>
+          </div>
+          <div class="cal-grid">
+            <div class="dow" data-en="Sun" data-fr="Dim">Sun</div>
+            <div class="dow" data-en="Mon" data-fr="Lun">Mon</div>
+            <div class="dow" data-en="Tue" data-fr="Mar">Tue</div>
+            <div class="dow" data-en="Wed" data-fr="Mer">Wed</div>
+            <div class="dow" data-en="Thu" data-fr="Jeu">Thu</div>
+            <div class="dow" data-en="Fri" data-fr="Ven">Fri</div>
+            <div class="dow" data-en="Sat" data-fr="Sam">Sat</div>
+            <div class="cal-cell blank"></div>
+            <div class="cal-cell blank"></div>
+            <div class="cal-cell blank"></div>
+            <div class="cal-cell blank"></div>
+            <div class="cal-cell talk" title="Prof. Frank Rudzicz · 12:00 PM ET">1</div>
+            <div class="cal-cell">2</div>
+            <div class="cal-cell">3</div>
+            <div class="cal-cell">4</div>
+            <div class="cal-cell">5</div>
+            <div class="cal-cell">6</div>
+            <div class="cal-cell">7</div>
+            <div class="cal-cell">8</div>
+            <div class="cal-cell">9</div>
+            <div class="cal-cell">10</div>
+            <div class="cal-cell">11</div>
+            <div class="cal-cell">12</div>
+            <div class="cal-cell">13</div>
+            <div class="cal-cell">14</div>
+            <div class="cal-cell">15</div>
+            <div class="cal-cell">16</div>
+            <div class="cal-cell">17</div>
+            <div class="cal-cell">18</div>
+            <div class="cal-cell">19</div>
+            <div class="cal-cell">20</div>
+            <div class="cal-cell">21</div>
+            <div class="cal-cell">22</div>
+            <div class="cal-cell">23</div>
+            <div class="cal-cell">24</div>
+            <div class="cal-cell">25</div>
+            <div class="cal-cell">26</div>
+            <div class="cal-cell">27</div>
+            <div class="cal-cell">28</div>
+            <div class="cal-cell talk" title="Dr. Matthew McDermott · 12:00 PM ET">29</div>
+            <div class="cal-cell">30</div>
+            <div class="cal-cell">31</div>
+          </div>
+          <div class="cal-legend"><span class="dot"></span><span data-en="Reading group talk" data-fr="Présentation du groupe">Reading group talk</span></div>
+        </aside>
+        <div class="grid">
         <div class="card featured">
           <div class="when" data-en="Thu, Oct 1, 2026 · 12:00 PM ET" data-fr="Jeu. 1 oct. 2026 · 12 h 00 (HE)">Thu, Oct 1, 2026 &middot; 12:00 PM ET</div>
           <h3 data-en="Title to be announced" data-fr="Titre à annoncer">Title to be announced</h3>
@@ -252,6 +319,7 @@
         </div>
         <div class="card" style="display:grid;place-items:center;text-align:center;color:var(--muted)">
           <div><span class="pill" data-en="More coming" data-fr="À venir">More coming</span><p class="abs" style="margin-top:10px" data-en="More talks are being scheduled around speaker availability. Request to join to get announcements first." data-fr="D'autres présentations sont planifiées selon la disponibilité des personnes invitées. Demandez à joindre pour recevoir les annonces en primeur.">More talks are being scheduled around speaker availability. Request to join to get announcements first.</p></div>
+        </div>
         </div>
       </div>
     </section>
