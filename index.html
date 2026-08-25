@@ -155,10 +155,14 @@
   .cal-grid .dow{font-size:10.5px;font-weight:700;color:var(--muted);text-align:center;padding:2px 0 6px;text-transform:uppercase;letter-spacing:.03em}
   .cal-cell{height:36px;display:grid;place-items:center;font-size:13px;border-radius:9px;color:var(--ink)}
   .cal-cell.blank{color:transparent}
-  .cal-cell.talk{background:var(--red);color:#fff;font-weight:800;position:relative;cursor:default}
+  .cal-cell.talk{background:var(--red);color:#fff;font-weight:800;position:relative;cursor:pointer;transition:.15s}
+  .cal-cell.talk:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .cal-cell.talk:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--red)}
   .cal-cell.talk::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:.9}
   .cal-legend{display:flex;align-items:center;gap:8px;margin-top:15px;font-size:12px;color:var(--muted)}
   .cal-legend .dot{width:11px;height:11px;border-radius:50%;background:var(--red);display:inline-block;flex:none}
+  .card.flash{animation:cardflash 1.4s ease}
+  @keyframes cardflash{0%{box-shadow:0 0 0 0 rgba(228,0,43,0)}12%{box-shadow:0 0 0 3px rgba(228,0,43,.55)}100%{box-shadow:0 0 0 0 rgba(228,0,43,0)}}
 
   /* About */
   .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px}
@@ -269,7 +273,7 @@
             <div class="cal-cell blank"></div>
             <div class="cal-cell blank"></div>
             <div class="cal-cell blank"></div>
-            <div class="cal-cell talk" title="Prof. Frank Rudzicz · 12:00 PM ET">1</div>
+            <div class="cal-cell talk" role="button" tabindex="0" data-talk="up-oct1" title="Prof. Frank Rudzicz · 12:00 PM ET">1</div>
             <div class="cal-cell">2</div>
             <div class="cal-cell">3</div>
             <div class="cal-cell">4</div>
@@ -297,21 +301,21 @@
             <div class="cal-cell">26</div>
             <div class="cal-cell">27</div>
             <div class="cal-cell">28</div>
-            <div class="cal-cell talk" title="Dr. Matthew McDermott · 12:00 PM ET">29</div>
+            <div class="cal-cell talk" role="button" tabindex="0" data-talk="up-oct29" title="Dr. Matthew McDermott · 12:00 PM ET">29</div>
             <div class="cal-cell">30</div>
             <div class="cal-cell">31</div>
           </div>
           <div class="cal-legend"><span class="dot"></span><span data-en="Reading group talk" data-fr="Présentation du groupe">Reading group talk</span></div>
         </aside>
         <div class="grid">
-        <div class="card featured">
+        <div class="card featured" id="up-oct1">
           <div class="when" data-en="Thu, Oct 1, 2026 · 12:00 PM ET" data-fr="Jeu. 1 oct. 2026 · 12 h 00 (HE)">Thu, Oct 1, 2026 &middot; 12:00 PM ET</div>
           <h3 data-en="Title to be announced" data-fr="Titre à annoncer">Title to be announced</h3>
           <div class="who">Prof. Frank Rudzicz</div>
           <div class="aff">Dalhousie University &amp; Vector Institute</div>
           <p class="abs" data-en="Talk over Google Meet. Title and abstract to come in September." data-fr="Présentation sur Google Meet. Titre et résumé à venir en septembre.">Talk over Google Meet. Title and abstract to come in September.</p>
         </div>
-        <div class="card">
+        <div class="card" id="up-oct29">
           <div class="when" data-en="Thu, Oct 29, 2026 · 12:00 PM ET" data-fr="Jeu. 29 oct. 2026 · 12 h 00 (HE)">Thu, Oct 29, 2026 &middot; 12:00 PM ET</div>
           <h3 data-en="Title to be announced" data-fr="Titre à annoncer">Title to be announced</h3>
           <div class="who">Dr. Matthew McDermott</div>
@@ -481,6 +485,17 @@
     if(lb) lb.addEventListener('click', ()=> setLang(document.documentElement.getAttribute('lang') === 'fr' ? 'en' : 'fr'));
     const tb = document.getElementById('themeBtn');
     if(tb) tb.addEventListener('click', ()=> setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    // Calendar: click or press Enter/Space on a talk day to jump to its card
+    document.querySelectorAll('.cal-cell.talk[data-talk]').forEach(cell=>{
+      const go = ()=>{
+        const card = document.getElementById(cell.dataset.talk);
+        if(!card) return;
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+        card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+      };
+      cell.addEventListener('click', go);
+      cell.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(); } });
+    });
   })();
 </script>
 </body>
