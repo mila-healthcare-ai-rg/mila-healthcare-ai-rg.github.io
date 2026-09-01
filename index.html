@@ -148,7 +148,12 @@
   @media(max-width:820px){.up-layout{grid-template-columns:1fr}}
   .cal{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:var(--panel)}
   @media(min-width:821px){.cal{position:sticky;top:82px}}
-  .cal-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
+  .cal-nav{display:flex;gap:6px;flex:none}
+  .cal-arrow{width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:9px;cursor:pointer;transition:.15s;padding:0}
+  .cal-arrow:hover:not(:disabled){background:var(--line);transform:translateY(-1px)}
+  .cal-arrow:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--red)}
+  .cal-arrow:disabled{opacity:.32;cursor:default}
   .cal-title{font-size:16px;font-weight:800;letter-spacing:-.01em}
   .cal-sub{font-size:12px;color:var(--muted);font-weight:700}
   .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
@@ -258,99 +263,20 @@
       <div class="up-layout">
         <aside class="cal" aria-label="Upcoming talks calendar">
           <div class="cal-head">
-            <div class="cal-title" data-en="September 2026" data-fr="Septembre 2026">September 2026</div>
-            <div class="cal-sub" data-en="1 talk" data-fr="1 présentation">1 talk</div>
+            <div>
+              <div class="cal-title" id="calTitle">September 2026</div>
+              <div class="cal-sub" id="calSub">1 talk</div>
+            </div>
+            <div class="cal-nav">
+              <button type="button" class="cal-arrow" id="calPrev" aria-label="Previous month">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <button type="button" class="cal-arrow" id="calNext" aria-label="Next month">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
           </div>
-          <div class="cal-grid">
-            <div class="dow" data-en="Sun" data-fr="Dim">Sun</div>
-            <div class="dow" data-en="Mon" data-fr="Lun">Mon</div>
-            <div class="dow" data-en="Tue" data-fr="Mar">Tue</div>
-            <div class="dow" data-en="Wed" data-fr="Mer">Wed</div>
-            <div class="dow" data-en="Thu" data-fr="Jeu">Thu</div>
-            <div class="dow" data-en="Fri" data-fr="Ven">Fri</div>
-            <div class="dow" data-en="Sat" data-fr="Sam">Sat</div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell">1</div>
-            <div class="cal-cell">2</div>
-            <div class="cal-cell">3</div>
-            <div class="cal-cell">4</div>
-            <div class="cal-cell">5</div>
-            <div class="cal-cell">6</div>
-            <div class="cal-cell">7</div>
-            <div class="cal-cell">8</div>
-            <div class="cal-cell">9</div>
-            <div class="cal-cell">10</div>
-            <div class="cal-cell">11</div>
-            <div class="cal-cell">12</div>
-            <div class="cal-cell">13</div>
-            <div class="cal-cell">14</div>
-            <div class="cal-cell">15</div>
-            <div class="cal-cell">16</div>
-            <div class="cal-cell talk" role="button" tabindex="0" data-talk="up-sep17" title="Dr. Rahul G. Krishnan · 12:00 PM ET">17</div>
-            <div class="cal-cell">18</div>
-            <div class="cal-cell">19</div>
-            <div class="cal-cell">20</div>
-            <div class="cal-cell">21</div>
-            <div class="cal-cell">22</div>
-            <div class="cal-cell">23</div>
-            <div class="cal-cell">24</div>
-            <div class="cal-cell">25</div>
-            <div class="cal-cell">26</div>
-            <div class="cal-cell">27</div>
-            <div class="cal-cell">28</div>
-            <div class="cal-cell">29</div>
-            <div class="cal-cell">30</div>
-          </div>
-
-          <div class="cal-head" style="margin-top:22px">
-            <div class="cal-title" data-en="October 2026" data-fr="Octobre 2026">October 2026</div>
-            <div class="cal-sub" data-en="2 talks" data-fr="2 présentations">2 talks</div>
-          </div>
-          <div class="cal-grid">
-            <div class="dow" data-en="Sun" data-fr="Dim">Sun</div>
-            <div class="dow" data-en="Mon" data-fr="Lun">Mon</div>
-            <div class="dow" data-en="Tue" data-fr="Mar">Tue</div>
-            <div class="dow" data-en="Wed" data-fr="Mer">Wed</div>
-            <div class="dow" data-en="Thu" data-fr="Jeu">Thu</div>
-            <div class="dow" data-en="Fri" data-fr="Ven">Fri</div>
-            <div class="dow" data-en="Sat" data-fr="Sam">Sat</div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell blank"></div>
-            <div class="cal-cell talk" role="button" tabindex="0" data-talk="up-oct1" title="Prof. Frank Rudzicz · 12:00 PM ET">1</div>
-            <div class="cal-cell">2</div>
-            <div class="cal-cell">3</div>
-            <div class="cal-cell">4</div>
-            <div class="cal-cell">5</div>
-            <div class="cal-cell">6</div>
-            <div class="cal-cell">7</div>
-            <div class="cal-cell">8</div>
-            <div class="cal-cell">9</div>
-            <div class="cal-cell">10</div>
-            <div class="cal-cell">11</div>
-            <div class="cal-cell">12</div>
-            <div class="cal-cell">13</div>
-            <div class="cal-cell">14</div>
-            <div class="cal-cell">15</div>
-            <div class="cal-cell">16</div>
-            <div class="cal-cell">17</div>
-            <div class="cal-cell">18</div>
-            <div class="cal-cell">19</div>
-            <div class="cal-cell">20</div>
-            <div class="cal-cell">21</div>
-            <div class="cal-cell">22</div>
-            <div class="cal-cell">23</div>
-            <div class="cal-cell">24</div>
-            <div class="cal-cell">25</div>
-            <div class="cal-cell">26</div>
-            <div class="cal-cell">27</div>
-            <div class="cal-cell">28</div>
-            <div class="cal-cell talk" role="button" tabindex="0" data-talk="up-oct29" title="Dr. Matthew McDermott · 12:00 PM ET">29</div>
-            <div class="cal-cell">30</div>
-            <div class="cal-cell">31</div>
-          </div>
+          <div class="cal-grid" id="calGrid"></div>
           <div class="cal-legend"><span class="dot"></span><span data-en="Reading group talk" data-fr="Présentation du groupe">Reading group talk</span></div>
         </aside>
         <div class="grid">
@@ -501,6 +427,92 @@
     }
   };
 
+
+  /* ---- Upcoming calendar: one month at a time, arrows to move between months ---- */
+  const TALKS = [
+    { y:2026, m:8,  d:17, id:'up-sep17', who:'Dr. Rahul G. Krishnan' },
+    { y:2026, m:9,  d:1,  id:'up-oct1',  who:'Prof. Frank Rudzicz' },
+    { y:2026, m:9,  d:29, id:'up-oct29', who:'Dr. Matthew McDermott' }
+  ];
+  const CAL_MONTHS = {
+    en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    fr:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+  };
+  const CAL_DOW = {
+    en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+    fr:['Dim','Lun','Mar','Mer','Jeu','Ven','Sam']
+  };
+  const CAL_TIME = { en:'12:00 PM ET', fr:'12 h 00 (HE)' };
+  const calIdx = t => t.y*12 + t.m;
+  const CAL_MIN = TALKS.length ? Math.min.apply(null, TALKS.map(calIdx)) : 0;
+  const CAL_MAX = TALKS.length ? Math.max.apply(null, TALKS.map(calIdx)) : 0;
+  let calCur = CAL_MIN;
+
+  function stepCal(delta){
+    const next = calCur + delta;
+    if(next < CAL_MIN || next > CAL_MAX) return;
+    calCur = next;
+    renderCal();
+  }
+
+  function renderCal(){
+    const grid = document.getElementById('calGrid');
+    if(!grid) return;
+    const lang = document.documentElement.getAttribute('lang') === 'fr' ? 'fr' : 'en';
+    const y = Math.floor(calCur/12), m = calCur % 12;
+    const monthTalks = TALKS.filter(t => t.y===y && t.m===m);
+
+    const title = document.getElementById('calTitle');
+    if(title) title.textContent = CAL_MONTHS[lang][m] + ' ' + y;
+    const sub = document.getElementById('calSub');
+    if(sub){
+      const n = monthTalks.length;
+      sub.textContent = lang === 'fr'
+        ? (n === 1 ? '1 présentation' : n + ' présentations')
+        : (n === 1 ? '1 talk' : n + ' talks');
+    }
+
+    grid.innerHTML = '';
+    CAL_DOW[lang].forEach(d=>{
+      const c = document.createElement('div');
+      c.className = 'dow'; c.textContent = d;
+      grid.appendChild(c);
+    });
+    const lead = new Date(y, m, 1).getDay();
+    const days = new Date(y, m+1, 0).getDate();
+    for(let i=0;i<lead;i++){
+      const c = document.createElement('div');
+      c.className = 'cal-cell blank';
+      grid.appendChild(c);
+    }
+    for(let d=1; d<=days; d++){
+      const c = document.createElement('div');
+      c.className = 'cal-cell';
+      c.textContent = d;
+      const talk = monthTalks.find(t => t.d === d);
+      if(talk){
+        c.className = 'cal-cell talk';
+        c.setAttribute('role','button');
+        c.setAttribute('tabindex','0');
+        c.setAttribute('title', talk.who + ' \u00b7 ' + CAL_TIME[lang]);
+        const go = ()=>{
+          const card = document.getElementById(talk.id);
+          if(!card) return;
+          card.scrollIntoView({behavior:'smooth', block:'center'});
+          card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+        };
+        c.addEventListener('click', go);
+        c.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(); } });
+      }
+      grid.appendChild(c);
+    }
+
+    const cp = document.getElementById('calPrev');
+    const cn = document.getElementById('calNext');
+    if(cp) cp.disabled = calCur <= CAL_MIN;
+    if(cn) cn.disabled = calCur >= CAL_MAX;
+  }
+
   function setLang(lang){
     document.documentElement.setAttribute('lang', lang);
     document.querySelectorAll('[data-en]').forEach(el=>{
@@ -514,6 +526,7 @@
     const lb = document.getElementById('langBtn');
     if(lb) lb.textContent = (lang === 'en' ? 'FR' : 'EN');
     try{ localStorage.setItem('lang', lang); }catch(e){}
+    renderCal();
   }
 
   const ICON_MOON = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
@@ -538,17 +551,10 @@
     if(lb) lb.addEventListener('click', ()=> setLang(document.documentElement.getAttribute('lang') === 'fr' ? 'en' : 'fr'));
     const tb = document.getElementById('themeBtn');
     if(tb) tb.addEventListener('click', ()=> setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-    // Calendar: click or press Enter/Space on a talk day to jump to its card
-    document.querySelectorAll('.cal-cell.talk[data-talk]').forEach(cell=>{
-      const go = ()=>{
-        const card = document.getElementById(cell.dataset.talk);
-        if(!card) return;
-        card.scrollIntoView({behavior:'smooth', block:'center'});
-        card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
-      };
-      cell.addEventListener('click', go);
-      cell.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(); } });
-    });
+    const cp = document.getElementById('calPrev');
+    const cn = document.getElementById('calNext');
+    if(cp) cp.addEventListener('click', ()=> stepCal(-1));
+    if(cn) cn.addEventListener('click', ()=> stepCal(1));
   })();
 </script>
 </body>
