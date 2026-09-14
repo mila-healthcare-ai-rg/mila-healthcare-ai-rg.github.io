@@ -168,6 +168,12 @@
   .cal-legend .dot{width:11px;height:11px;border-radius:50%;background:var(--red);display:inline-block;flex:none}
   .card.flash{animation:cardflash 1.4s ease}
   /* Upcoming: clamp long abstracts, reveal the rest in a dialog */
+  .card .logi{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--muted)}
+  .card .logi b{color:var(--ink);font-weight:700;margin-right:6px}
+  .meetbtn{align-self:flex-start;margin-top:9px;display:inline-block;padding:8px 15px;border-radius:999px;background:var(--red);color:#fff;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.01em}
+  .meetbtn:hover{filter:brightness(1.08)}
+  .meetbtn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--red)}
+  .meet-pending{font-style:italic}
   .card p.abs.clamped{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
   .readmore{margin-top:10px;background:none;border:0;padding:0;font:inherit;font-size:13px;font-weight:700;color:var(--red);cursor:pointer;letter-spacing:.01em}
   .readmore:hover{text-decoration:underline}
@@ -302,6 +308,11 @@
           <div class="who">Dr. Rahul G. Krishnan</div>
           <div class="aff">University of Toronto &amp; Vector Institute</div>
           <p class="abs" data-en="Tabular data, clinical records, treatment histories and outcomes remain the backbone of quantitative work in medicine. Yet building effective models on this data still demands substantial technical expertise: feature engineering, model selection, hyperparameter tuning, and careful validation, repeated for every new dataset and question. This talk introduces tabular foundation models, an emerging class of methods pre-trained on large families of synthetic datasets that then perform inference on a new dataset in a single forward pass, requiring no per-dataset training or tuning. For prediction, this approach has proven competitive against heavily tuned gradient-boosted trees on small- and medium-sized tabular problems. This talk focuses on what matters most in medicine: questions that are not simply predictive. SurvivalPFN handles time-to-event problems with censoring, a natural fit for time-to-mortality and other duration outcomes where standard classifiers discard information. CausalPFN targets effect estimation for decisions. Time permitting, we will cover IVICL which brings instrumental-variable estimation into the in-context learning framework, directly addressing the endogeneity and unobserved-confounding problems that make naive effect estimates unreliable in observational clinical data. Looking to the future, the talk will hint at how knowledge work in medicine can be solved via compositions of foundation models and tabular models." data-fr="Les données tabulaires, les dossiers cliniques, les historiques de traitement et les résultats demeurent le socle du travail quantitatif en médecine. Pourtant, construire des modèles efficaces sur ces données exige encore une expertise technique considérable : ingénierie des variables, sélection de modèles, réglage des hyperparamètres et validation soignée, à refaire pour chaque nouveau jeu de données et chaque question. Cette présentation introduit les modèles de fondation tabulaires, une classe émergente de méthodes pré-entraînées sur de vastes familles de jeux de données synthétiques, qui effectuent ensuite l'inférence sur un nouveau jeu de données en une seule passe avant, sans entraînement ni réglage propres à ce jeu de données. Pour la prédiction, cette approche s'est montrée compétitive face à des arbres à gradient boosté finement réglés sur des problèmes tabulaires de petite et moyenne taille. La présentation porte sur ce qui compte le plus en médecine : les questions qui ne sont pas seulement prédictives. SurvivalPFN traite les problèmes de temps jusqu'à l'événement avec censure, ce qui convient naturellement au temps jusqu'au décès et à d'autres résultats de durée où les classifieurs standards écartent de l'information. CausalPFN vise l'estimation des effets pour la prise de décision. Si le temps le permet, nous aborderons IVICL, qui intègre l'estimation par variables instrumentales au cadre de l'apprentissage en contexte, en s'attaquant directement aux problèmes d'endogénéité et de confusion non observée qui rendent peu fiables les estimations naïves d'effet dans les données cliniques observationnelles. En guise d'ouverture, la présentation esquissera comment le travail de connaissance en médecine pourrait se résoudre par des compositions de modèles de fondation et de modèles tabulaires.">Tabular data, clinical records, treatment histories and outcomes remain the backbone of quantitative work in medicine. Yet building effective models on this data still demands substantial technical expertise: feature engineering, model selection, hyperparameter tuning, and careful validation, repeated for every new dataset and question. This talk introduces tabular foundation models, an emerging class of methods pre-trained on large families of synthetic datasets that then perform inference on a new dataset in a single forward pass, requiring no per-dataset training or tuning. For prediction, this approach has proven competitive against heavily tuned gradient-boosted trees on small- and medium-sized tabular problems. This talk focuses on what matters most in medicine: questions that are not simply predictive. SurvivalPFN handles time-to-event problems with censoring, a natural fit for time-to-mortality and other duration outcomes where standard classifiers discard information. CausalPFN targets effect estimation for decisions. Time permitting, we will cover IVICL which brings instrumental-variable estimation into the in-context learning framework, directly addressing the endogeneity and unobserved-confounding problems that make naive effect estimates unreliable in observational clinical data. Looking to the future, the talk will hint at how knowledge work in medicine can be solved via compositions of foundation models and tabular models.</p>
+    <div class="logi">
+      <span><b data-en="Location" data-fr="Lieu">Location</b><span data-en="Google Meet and A16" data-fr="Google Meet et A16">Google Meet and A16</span></span>
+      <span><b data-en="Format" data-fr="Format">Format</b><span data-en="About 45 minutes for the talk plus 15 for questions" data-fr="Environ 45 minutes de présentation et 15 minutes de questions">About 45 minutes for the talk plus 15 for questions</span></span>
+      <a class="meetbtn" href="https://meet.google.com/haz-pfgc-bzf" target="_blank" rel="noopener" data-en="Join on Google Meet" data-fr="Rejoindre sur Google Meet">Join on Google Meet</a>
+    </div>
         </div>
         <div class="card" id="up-oct1">
           <div class="when" data-en="Thu, Oct 1, 2026 · 12:00 PM ET" data-fr="Jeu. 1 oct. 2026 · 12 h 00 (HE)">Thu, Oct 1, 2026 &middot; 12:00 PM ET</div>
@@ -309,6 +320,11 @@
           <div class="who">Prof. Frank Rudzicz</div>
           <div class="aff">Dalhousie University &amp; Vector Institute</div>
           <p class="abs" data-en="Talk over Google Meet. Title and abstract to come in September." data-fr="Présentation sur Google Meet. Titre et résumé à venir en septembre.">Talk over Google Meet. Title and abstract to come in September.</p>
+    <div class="logi">
+      <span><b data-en="Location" data-fr="Lieu">Location</b><span data-en="Google Meet and A16" data-fr="Google Meet et A16">Google Meet and A16</span></span>
+      <span><b data-en="Format" data-fr="Format">Format</b><span data-en="About 45 minutes for the talk plus 15 for questions" data-fr="Environ 45 minutes de présentation et 15 minutes de questions">About 45 minutes for the talk plus 15 for questions</span></span>
+      <span class="meet-pending" data-en="Meet link will be shared closer to the date." data-fr="Le lien Meet sera transmis a l'approche de la date.">Meet link will be shared closer to the date.</span>
+    </div>
         </div>
         <div class="card" id="up-oct13">
           <div class="when" data-en="Tue, Oct 13, 2026 · 11:00 AM ET" data-fr="Mar. 13 oct. 2026 · 11 h 00 (HE)">Tue, Oct 13, 2026 &middot; 11:00 AM ET</div>
@@ -316,6 +332,11 @@
           <div class="who">Prof. Byron Wallace</div>
           <div class="aff">Northeastern University</div>
           <p class="abs" data-en="Talk over Google Meet. Note the one-off Tuesday time. Title and abstract to come." data-fr="Présentation sur Google Meet. À noter, séance exceptionnelle le mardi. Titre et résumé à venir.">Talk over Google Meet. Note the one-off Tuesday time. Title and abstract to come.</p>
+    <div class="logi">
+      <span><b data-en="Location" data-fr="Lieu">Location</b><span data-en="Google Meet and A16" data-fr="Google Meet et A16">Google Meet and A16</span></span>
+      <span><b data-en="Format" data-fr="Format">Format</b><span data-en="About 45 minutes for the talk plus 15 for questions" data-fr="Environ 45 minutes de présentation et 15 minutes de questions">About 45 minutes for the talk plus 15 for questions</span></span>
+      <span class="meet-pending" data-en="Meet link will be shared closer to the date." data-fr="Le lien Meet sera transmis a l'approche de la date.">Meet link will be shared closer to the date.</span>
+    </div>
         </div>
         <div class="card" id="up-oct29">
           <div class="when" data-en="Thu, Oct 29, 2026 · 12:00 PM ET" data-fr="Jeu. 29 oct. 2026 · 12 h 00 (HE)">Thu, Oct 29, 2026 &middot; 12:00 PM ET</div>
@@ -323,6 +344,11 @@
           <div class="who">Dr. Matthew McDermott</div>
           <div class="aff">Columbia University, Dept. of Biomedical Informatics</div>
           <p class="abs" data-en="Talk over Google Meet. Title and abstract to come." data-fr="Présentation sur Google Meet. Titre et résumé à venir.">Talk over Google Meet. Title and abstract to come.</p>
+    <div class="logi">
+      <span><b data-en="Location" data-fr="Lieu">Location</b><span data-en="Google Meet and A16" data-fr="Google Meet et A16">Google Meet and A16</span></span>
+      <span><b data-en="Format" data-fr="Format">Format</b><span data-en="About 45 minutes for the talk plus 15 for questions" data-fr="Environ 45 minutes de présentation et 15 minutes de questions">About 45 minutes for the talk plus 15 for questions</span></span>
+      <span class="meet-pending" data-en="Meet link will be shared closer to the date." data-fr="Le lien Meet sera transmis a l'approche de la date.">Meet link will be shared closer to the date.</span>
+    </div>
         </div>
         <div class="card" style="display:grid;place-items:center;text-align:center;color:var(--muted)">
           <div><span class="pill" data-en="More coming" data-fr="À venir">More coming</span><p class="abs" style="margin-top:10px" data-en="More talks are being scheduled around speaker availability. Request to join to get announcements first." data-fr="D'autres présentations sont planifiées selon la disponibilité des personnes invitées. Demandez à joindre pour recevoir les annonces en primeur.">More talks are being scheduled around speaker availability. Request to join to get announcements first.</p></div>
