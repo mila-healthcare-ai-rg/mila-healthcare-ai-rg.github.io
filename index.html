@@ -309,18 +309,6 @@
           <div class="cal-legend"><span class="dot"></span><span data-en="Reading group talk" data-fr="Présentation du groupe">Reading group talk</span></div>
         </aside>
         <div class="grid">
-        <div class="card" id="up-oct29">
-          <div class="when" data-en="Thu, Oct 29, 2026 · 12:00 PM ET" data-fr="Jeu. 29 oct. 2026 · 12 h 00 (HE)">Thu, Oct 29, 2026 &middot; 12:00 PM ET</div>
-          <h3 data-en="Title to be announced<span class='sr-only'>, Dr. Matthew McDermott</span>" data-fr="Titre à annoncer<span class='sr-only'>, Dr. Matthew McDermott</span>">Title to be announced<span class="sr-only">, Dr. Matthew McDermott</span></h3>
-          <div class="who">Dr. Matthew McDermott</div>
-          <div class="aff">Columbia University, Dept. of Biomedical Informatics</div>
-          <p class="abs" data-en="Talk over Google Meet. Title and abstract to come." data-fr="Présentation sur Google Meet. Titre et résumé à venir.">Talk over Google Meet. Title and abstract to come.</p>
-    <div class="logi">
-      <span><b data-en="Location" data-fr="Lieu">Location</b><span data-en="Google Meet, online only" data-fr="Google Meet, en ligne seulement">Google Meet, online only</span></span>
-      <span><b data-en="Format" data-fr="Format">Format</b><span data-en="About 45 minutes for the talk plus 15 for questions" data-fr="Environ 45 minutes de présentation et 15 minutes de questions">About 45 minutes for the talk plus 15 for questions</span></span>
-      <span class="meet-pending" data-en="Meet link will be shared closer to the date." data-fr="Le lien Meet sera transmis à l'approche de la date.">Meet link will be shared closer to the date.</span>
-    </div>
-        </div>
         <div class="card" style="display:grid;place-items:center;text-align:center;color:var(--muted)">
           <div><span class="pill" data-en="More coming" data-fr="À venir">More coming</span><p class="abs" style="margin-top:10px" data-en="More talks are being scheduled around speaker availability. Request to join to get announcements first." data-fr="D'autres présentations sont planifiées selon la disponibilité des personnes invitées. Demandez à joindre pour recevoir les annonces en primeur.">More talks are being scheduled around speaker availability. Request to join to get announcements first.</p></div>
         </div>
@@ -489,7 +477,6 @@
   const prefersReducedMotion = () => !!(RM_QUERY && RM_QUERY.matches);
 
   const TALKS = [
-    { y:2026, m:9,  d:29, id:'up-oct29', who:'Dr. Matthew McDermott' }
   ];
   const CAL_MONTHS = {
     en:['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -501,8 +488,9 @@
   };
   const CAL_TIME = { en:'12:00 PM ET', fr:'12 h 00 (HE)' };
   const calIdx = t => t.y*12 + t.m;
-  const CAL_MIN = TALKS.length ? Math.min.apply(null, TALKS.map(calIdx)) : 0;
-  const CAL_MAX = TALKS.length ? Math.max.apply(null, TALKS.map(calIdx)) : 0;
+  const CAL_NOW = calIdx({ y:new Date().getFullYear(), m:new Date().getMonth() });
+  const CAL_MIN = TALKS.length ? Math.min.apply(null, TALKS.map(calIdx)) : CAL_NOW;
+  const CAL_MAX = TALKS.length ? Math.max.apply(null, TALKS.map(calIdx)) : CAL_NOW;
   let calCur = CAL_MIN;
 
   function stepCal(delta){
